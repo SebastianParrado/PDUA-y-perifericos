@@ -1,4 +1,4 @@
-﻿-- Bloque que une multiplicación con la interrupción
+﻿-- Bloque que une multiplicacion con la interrupcion
 -- Versión: 1.0.1
 -- Autores: Sebastián Parrado
 --				Jelitza Varón
