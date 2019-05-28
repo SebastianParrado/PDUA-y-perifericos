@@ -50,11 +50,6 @@ BEGIN
 							intB_FSM <= '1';
 							nx_state <= state1;	-- Se pasa al siguiente estado
 						END IF;
---					ELSE
---						IF(intA_FSM='1') THEN	-- Si el contador ya no vale 0
---						intB_FSM <= int_s;		-- Las cosas se mantienen en su sitio
---						nx_state <= state1;		-- Se pasa al siguiente estado
---						END IF;
 					END IF;
 				WHEN state1 =>
 					IF (q="100") THEN				-- Si el contador es 4
