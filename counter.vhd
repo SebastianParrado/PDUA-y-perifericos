@@ -37,7 +37,7 @@ BEGIN
 	ena6 <= q_s(5) AND ena5;
 	ena7 <= q_s(6) AND ena6;
 	
--- Señal de interrupción será 1 cuando (el contador llegue al valor de count_fin o si llega al valor 
+-- Señal de interrupción será 1 cuando el contador llegue al valor de count_fin o si llega al valor 
 -- máximo
 	int_T <= (p0(7) AND p0(6) AND p0(5) AND p0(4) AND p0(3) AND p0(2) AND p0(1) AND p0(0))
 				OR
