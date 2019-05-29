@@ -11,7 +11,6 @@ ENTITY counter IS
 	PORT (	clk		:	IN		STD_LOGIC;
 				rst		:	IN		STD_LOGIC;
 				ena_T		:	IN		STD_LOGIC;
-				ena		:	IN		STD_LOGIC;
 				count_ini:	IN		STD_LOGIC_VECTOR(7 DOWNTO 0);
 				count_fin:	IN		STD_LOGIC_VECTOR(7 DOWNTO 0);
 				q			:	OUT	STD_LOGIC_VECTOR(7 DOWNTO 0);
@@ -43,7 +42,7 @@ BEGIN
 				(q_s(7) AND q_s(6) AND q_s(5) AND q_s(4) AND q_s(3) AND q_s(2) AND q_s(1) AND q_s(0));
 		p0 <= q_s XNOR count_fin;
 -------------------------------------------------------
-	q_8: PROCESS (ena_T,clk,rst,ena,count_ini,count_fin)
+	q_8: PROCESS (ena_T,clk,rst,count_ini,count_fin)
 	BEGIN
 	IF (ena_T='1') THEN
 		IF (rst='1') THEN
@@ -58,30 +57,28 @@ BEGIN
 			END IF;
 		ELSIF (rising_edge(clk)) THEN
 		-- q0
-			IF (ena ='1') THEN
 			q_s(0) <= NOT(q_s(0));
 		-- q1
-				IF (q_s(0) ='1') THEN
-					q_s(1) <= NOT(q_s(1));
+			IF (q_s(0) ='1') THEN
+				q_s(1) <= NOT(q_s(1));
 		-- q2
-					IF (ena2 ='1') THEN
-						q_s(2) <= NOT(q_s(2));
+				IF (ena2 ='1') THEN
+					q_s(2) <= NOT(q_s(2));
 		-- q3
-						IF (ena3 ='1') THEN
-							q_s(3) <= NOT(q_s(3));
+					IF (ena3 ='1') THEN
+						q_s(3) <= NOT(q_s(3));
 		-- q4
-							IF (ena4 ='1') THEN
-								q_s(4) <= NOT(q_s(4));
+						IF (ena4 ='1') THEN
+							q_s(4) <= NOT(q_s(4));
 		-- q5
-								IF (ena5 ='1') THEN
-									q_s(5) <= NOT(q_s(5));
+							IF (ena5 ='1') THEN
+								q_s(5) <= NOT(q_s(5));
 		-- q6
-									IF (ena6 ='1') THEN
-										q_s(6) <= NOT(q_s(6));
+								IF (ena6 ='1') THEN
+									q_s(6) <= NOT(q_s(6));
 		-- q7
-										IF(ena7='1') THEN
-											q_s(7) <= NOT(q_s(7));
-										END IF;
+									IF(ena7='1') THEN
+										q_s(7) <= NOT(q_s(7));
 									END IF;
 								END IF;
 							END IF;
