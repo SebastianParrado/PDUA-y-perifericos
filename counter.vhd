@@ -1,5 +1,5 @@
 -- Timer_IOM
--- Version 1.2
+-- Version 1.3
 -- Autores: Sebastián Parrado
 --				Jelitza Varón
 -- Contador de 8 bits usando un tff
@@ -26,6 +26,8 @@ ARCHITECTURE rtl OF counter IS
 	SIGNAL	ena6	:	STD_LOGIC;
 	SIGNAL	ena7	:	STD_LOGIC;
 	
+	SIGNAL	c0_s	:	STD_LOGIC;
+	
 	SIGNAL p0		:	STD_LOGIC_VECTOR(7 DOWNTO 0);
 BEGIN
 	ena2 <= q_s(1) AND q_s(0);
@@ -42,7 +44,7 @@ BEGIN
 				(q_s(7) AND q_s(6) AND q_s(5) AND q_s(4) AND q_s(3) AND q_s(2) AND q_s(1) AND q_s(0));
 		p0 <= q_s XNOR count_fin;
 -------------------------------------------------------
-	q_8: PROCESS (ena_T,clk,rst,count_ini,count_fin)
+	q_8: PROCESS (ena_T,c0_s,rst,count_ini,count_fin)
 	BEGIN
 	IF (ena_T='1') THEN
 		IF (rst='1') THEN
@@ -55,7 +57,7 @@ BEGIN
 			ELSE
 				q_s <= count_ini;
 			END IF;
-		ELSIF (rising_edge(clk)) THEN
+		ELSIF (rising_edge(c0_s)) THEN
 		-- q0
 			q_s(0) <= NOT(q_s(0));
 		-- q1
@@ -90,4 +92,9 @@ BEGIN
 	END IF;
 	END PROCESS q_8;
 	q <= q_s;
+-------------------------------------------------------	
+	PLL: ENTITY work.my_pll
+	PORT MAP (	areset	=> rst,
+					inclk0	=> clk,
+					c0			=> c0_s);
 END ARCHITECTURE rtl;
